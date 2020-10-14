@@ -1,0 +1,14 @@
+#!/bin/sh
+#
+# Clone the git repository into workspace
+
+git-fetch() {
+    echo "[fetch-git]"
+
+    #if [ ! -d "$GIT_REPO" ]; then
+    #    echo "The git repository does not exists: $GIT_REPO"
+    #    exit 1
+    #fi
+
+    git clone "$GIT_REPO" ./workspace
+}

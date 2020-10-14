@@ -1,0 +1,12 @@
+#!/bin/sh
+#
+# Prepare job folder
+
+prepare() {
+    echo "[prepare]"
+
+    # Clean out the workspace
+    rm -rf ./workspace
+    mkdir -p ./workspace
+    mkdir -p ./builds
+}

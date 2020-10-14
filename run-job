@@ -1,0 +1,11 @@
+#!/bin/bash
+set -eu -o pipefail
+
+ROOT=$(dirname "$0")
+
+source "$ROOT"/framework
+bootstrap
+
+cd "$JOBS/$1"
+prepare
+source "./build"

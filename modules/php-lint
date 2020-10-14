@@ -1,0 +1,9 @@
+#!/bin/sh
+#
+# Lint all php files
+
+php-lint() {
+    echo "[php-lint]"
+
+    find ./workspace -name '*.php' -print0 | xargs -0 -n1 php -l
+}

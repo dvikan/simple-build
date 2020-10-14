@@ -1,0 +1,13 @@
+#!/bin/sh
+#
+# Installs composer dependencies
+
+composer-install() {
+    echo "[composer-install]"
+
+    composer install \
+        --working-dir=./workspace \
+        --no-dev \
+        --prefer-dist \
+        --no-ansi
+}

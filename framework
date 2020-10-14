@@ -1,0 +1,12 @@
+#!/bin/bash
+set -eu -o pipefail
+
+bootstrap() {
+    for module in "$ROOT"/modules/*; do
+        source "$module"
+    done
+
+    for module in "$ROOT"/contrib/*; do
+        source "$module"
+    done
+}
