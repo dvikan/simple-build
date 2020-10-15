@@ -1,0 +1,9 @@
+#!/bin/sh
+#
+# Update the git repository in ./workspace
+
+git-pull() {
+    echo "[git-pull]"
+
+    git -C ./workspace pull
+}

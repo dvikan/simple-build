@@ -2,16 +2,16 @@
 set -eu -o pipefail
 
 bootstrap() {
-JOBS=$HOME/.jobs
-mkdir -p "$JOBS"
+    JOBS=$HOME/.jobs
+    mkdir -p "$JOBS"
 
-for module in "$ROOT"/modules/*; do
-    source "$module"
-done
+    for module in "$ROOT"/modules/*; do
+        source "$module"
+    done
 
-for module in "$ROOT"/contrib/*; do
-    source "$module"
-done
+    for module in "$ROOT"/contrib/*; do
+        source "$module"
+    done
 }
 
 create-job() {
@@ -58,9 +58,9 @@ run-job() {
     # Change current working directory to the job folder
     cd "$JOBS/$NAME"
 
-    # Write to both stdout and file
     LOG="./output.log"
     date '+%Y-%m-%d %H:%M:%S' | tee -a "$LOG"
-    source "./build" | tee -a "$LOG"
+    # Write to both stdout, stderr and file
+    source "./build" 2>&1 | tee -a "$LOG"
 }
 

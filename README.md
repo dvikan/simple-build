@@ -69,5 +69,5 @@ Jobs are stored in `~/.jobs` and a job looks like this:
 
     2 directories, 5 files
 
-The `build` constains the build steps. The `workspace` contains the application source code.
-The `builds` contains tarballs of the workspace.
+The `build` contains the build steps. The `workspace` contains the application source code.
+The `builds` contains tarballs of the workspace. The `output.log` contains build output.
