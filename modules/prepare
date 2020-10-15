@@ -1,8 +1,0 @@
-#!/bin/sh
-#
-# Prepare job folder (wipe out the ./workspace)
-
-prepare() {
-    echo "[prepare]"
-
-}
