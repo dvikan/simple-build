@@ -1,0 +1,8 @@
+#!/bin/bash
+set -eu -o pipefail
+
+ROOT=$(dirname "$0")/../
+source "$ROOT"/framework
+
+NAME="$1"
+delete-job "$NAME"

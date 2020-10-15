@@ -1,12 +1,58 @@
 #!/bin/bash
 set -eu -o pipefail
 
-bootstrap() {
-    for module in "$ROOT"/modules/*; do
-        source "$module"
-    done
+JOBS=$HOME/.jobs
+mkdir -p "$JOBS"
 
-    for module in "$ROOT"/contrib/*; do
-        source "$module"
+for module in "$ROOT"/modules/*; do
+    source "$module"
+done
+
+for module in "$ROOT"/contrib/*; do
+    source "$module"
+done
+
+create-job() {
+    NAME="$1"
+
+    if [ -d "$JOBS/$NAME" ]; then
+        echo "Job with name $NAME already exists"
+        exit 1
+    fi
+
+    mkdir "$JOBS/$NAME/"
+    echo "example" > "$JOBS/$NAME/build"
+    echo "Created job at $JOBS/$NAME"
+}
+
+list-jobs() {
+    for job in "$JOBS"/*; do
+        basename "$job"
     done
 }
+
+delete-job() {
+    NAME="$1"
+
+    if [ ! -d "$JOBS/$NAME" ]; then
+        echo "Job with name $NAME does not exists"
+        exit 1
+    fi
+
+    rm -rf "$JOBS/$NAME/"
+    echo "Deleted job at $JOBS/$NAME"
+}
+
+run-job() {
+    NAME="$1"
+
+    if [ ! -d "$JOBS/$NAME" ]; then
+        echo "Job with name $NAME does not exists"
+        exit 1
+    fi
+
+    echo "Running job at $JOBS/$NAME"
+    cd "$JOBS/$NAME"
+    source "./build"
+}
+

@@ -9,6 +9,8 @@ familiar with linux and bash.
 
 ## Non-features (requires manual steps)
 
+* ssh keys managment
+
 ## Modules
 
 Core modules:
@@ -27,23 +29,29 @@ Clone this repository:
 
     $ git clone https://github.com/dvikan/simple-build
 
-Create the folder to store all jobs: `mkdir /tmp/jobs`.
+Place `./bin` in path: `PATH="./bin:$PATH"
 
-Create the job folder:
+Create a job:
 
-    $ mkdir /tmp/jobs/first/
-    $ mkdir /tmp/jobs/first/workspace
-    $ mkdir /tmp/jobs/first/builds
+    $ create-job first
 
-Create the job's build script: `vim /tmp/jobs/first/build`:
+List all jobs:
 
-    echo Hello world
+    $ list-jobs
 
-Run the job:
+Run a job:
 
-    $ JOBS=/tmp/jobs simple-build/run-job first
+    $ run-job first
+
+Delete a job:
+
+    $ delete-job first
 
 Create a cronjob for the job:
 
     $ crontab -e
-    JOBS=/tmp/jobs /home/joe/simple-build/run-job first
+    /home/joe/simple-build/bin/run-job first
+
+## Todos
+
+* Web hooks

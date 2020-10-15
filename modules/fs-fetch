@@ -1,0 +1,9 @@
+#!/bin/sh
+#
+# Copy folder from local fs
+
+fs-fetch() {
+    echo "[fs-fetch]"
+
+    cp -r "$FOLDER/"* ./workspace/
+}
