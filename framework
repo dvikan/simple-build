@@ -17,10 +17,10 @@ done
 create-job() {
     NAME="$1"
 
-#    if [ -d "$JOBS/$NAME" ]; then
-#        echo "Job with name $NAME already exists"
-#        exit 1
-#    fi
+    if [ -d "$JOBS/$NAME" ]; then
+        echo "Job with name $NAME already exists"
+        exit 1
+    fi
 
     mkdir "$JOBS/$NAME/"
     mkdir "$JOBS/$NAME/workspace"

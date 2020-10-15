@@ -9,7 +9,8 @@ familiar with linux and bash.
 
 ## Non-features (requires manual steps)
 
-* ssh keys managment
+* automatic job schedueling
+* ssh keys setup
 
 ## Modules
 
@@ -27,9 +28,9 @@ Your custom modules can be placed in the contrib folder.
 
 Clone this repository:
 
-    $ git clone https://github.com/dvikan/simple-build
+    $ git clone https://github.com/dvikan/simple-build ~/
 
-Place `./bin` in path: `PATH="./bin:$PATH"
+Modify PATH: `PATH="$HOME/simple-build/bin:$PATH"`
 
 Create a job:
 
@@ -47,11 +48,26 @@ Delete a job:
 
     $ delete-job first
 
-Create a cronjob for the job:
+Run a job from crontab:
 
     $ crontab -e
-    /home/joe/simple-build/bin/run-job first
+    * * * * * $HOME/simple-build/bin/run-job first
 
-## Todos
+## Anatomy of the job
 
-* Web hooks
+Jobs are stored in `~/.jobs` and a job looks like this:
+
+    $ tree ~/.jobs/test
+    /home/u/.jobs/test
+    ├── build
+    ├── builds
+    │   ├── 2020-10-15_18:46:20.tgz
+    │   └── 2020-10-15_18:46:26.tgz
+    ├── output.log
+    └── workspace
+        └── hello.php
+
+    2 directories, 5 files
+
+The `build` constains the build steps. The `workspace` contains the application source code.
+The `builds` contains tarballs of the workspace.
