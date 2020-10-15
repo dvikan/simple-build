@@ -1,9 +1,13 @@
 #!/bin/sh
 #
-# Clone the git repository into workspace
+# Clone the git repository into ./workspace
 
 git-fetch() {
+    REPO="$1"
     echo "[git-fetch]"
 
-    git clone "$1" ./workspace
+    rm -rf ./workspace
+    mkdir ./workspace
+
+    git clone "$REPO" ./workspace
 }

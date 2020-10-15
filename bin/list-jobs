@@ -3,5 +3,6 @@ set -eu -o pipefail
 
 ROOT=$(dirname "$0")/../
 source "$ROOT"/framework
+bootstrap
 
 list-jobs

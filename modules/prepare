@@ -1,10 +1,8 @@
 #!/bin/sh
 #
-# Prepare job folder
+# Prepare job folder (wipe out the ./workspace)
 
 prepare() {
     echo "[prepare]"
 
-    rm -rf ./workspace
-    mkdir ./workspace
 }

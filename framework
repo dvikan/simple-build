@@ -1,6 +1,7 @@
 #!/bin/bash
 set -eu -o pipefail
 
+bootstrap() {
 JOBS=$HOME/.jobs
 mkdir -p "$JOBS"
 
@@ -11,18 +12,21 @@ done
 for module in "$ROOT"/contrib/*; do
     source "$module"
 done
+}
 
 create-job() {
     NAME="$1"
 
-    if [ -d "$JOBS/$NAME" ]; then
-        echo "Job with name $NAME already exists"
-        exit 1
-    fi
+#    if [ -d "$JOBS/$NAME" ]; then
+#        echo "Job with name $NAME already exists"
+#        exit 1
+#    fi
 
     mkdir "$JOBS/$NAME/"
-    echo "example" > "$JOBS/$NAME/build"
-    echo "Created job at $JOBS/$NAME"
+    mkdir "$JOBS/$NAME/workspace"
+    mkdir "$JOBS/$NAME/builds"
+
+    touch "$JOBS/$NAME/build"
 }
 
 list-jobs() {
@@ -51,8 +55,12 @@ run-job() {
         exit 1
     fi
 
-    echo "Running job at $JOBS/$NAME"
+    # Change current working directory to the job folder
     cd "$JOBS/$NAME"
-    source "./build"
+
+    # Write to both stdout and file
+    LOG="./output.log"
+    date '+%Y-%m-%d %H:%M:%S' | tee -a "$LOG"
+    source "./build" | tee -a "$LOG"
 }
 
