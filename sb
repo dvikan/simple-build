@@ -1,18 +1,18 @@
 #!/bin/bash
 set -eu -o pipefail
 
-bootstrap() {
-    JOBS=$HOME/.jobs
-    mkdir -p "$JOBS"
+ROOT=$(dirname "$0")/
 
-    for module in "$ROOT"/modules/*; do
-        source "$module"
-    done
+JOBS=$HOME/me/jobs
+mkdir -p "$JOBS"
 
-    for module in "$ROOT"/contrib/*; do
-        source "$module"
-    done
-}
+for module in "$ROOT"/modules/*; do
+    source "$module"
+done
+
+for module in "$ROOT"/contrib/*; do
+    source "$module"
+done
 
 create-job() {
     NAME="$1"
@@ -23,7 +23,7 @@ create-job() {
     fi
 
     mkdir "$JOBS/$NAME/"
-    mkdir "$JOBS/$NAME/workspace"
+#    mkdir "$JOBS/$NAME/workspace"
     mkdir "$JOBS/$NAME/builds"
     mkdir "$JOBS/$NAME/config"
 
@@ -78,3 +78,33 @@ run-job() {
     source "./job" 2>&1 | tee -a "$LOG"
     echo "" | tee -a "$LOG"
 }
+
+operation="${1-list}"
+name="${2-}"
+
+case "$operation" in 
+
+    create)
+        create-job "$name"
+        ;;
+
+    remove)
+        delete-job "$name"
+        ;;
+
+    edit)
+        edit-job "$name"
+        ;;
+
+    list)
+        list-jobs
+        ;;
+
+    run)
+        run-job "$name"
+        ;;
+
+    *)
+        echo default
+        ;;
+esac

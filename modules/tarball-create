@@ -1,12 +1,16 @@
 #!/bin/sh
-#
+# 
 # Create a tarball from ./workspace and place it into ./builds
 
 tarball-create() {
 #    echo "[tarball-create]"
 
     TARBALL="./builds/$(date '+%Y-%m-%d_%H:%M:%S').tgz"
-    tar --exclude-vcs -czf "$TARBALL" -C ./workspace .
 
-    echo "$TARBALL"
+    tar \
+        --exclude-vcs \
+        -czf "$TARBALL" \
+         -C ./workspace .
+
+    echo $(realpath "$TARBALL")
 }

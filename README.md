@@ -18,7 +18,8 @@ Features:
 
 Core modules:
 
-* git-pull Fetch source codes from git repository
+* git-pull Fetch source code from git repository
+* fs-fetch Fetch source code from file system
 * composer-install Install composer dependencies
 * php-lint Lint php source code
 * tarball-create Create a tarball
@@ -30,46 +31,60 @@ Your custom modules can be placed in the contrib folder.
 
 Clone this repository:
 
-    $ git clone https://github.com/dvikan/simple-build ~/
+```bash
+git clone https://github.com/dvikan/simple-build ~/
+```
 
-Modify PATH: `PATH="$HOME/simple-build/bin:$PATH"`
+Modify PATH: `PATH="$HOME/simple-build/:$PATH"`
 
-Create a job:
+Create job:
 
-    $ create-job first
+```bash
+sb create first
+```
 
 List all jobs:
 
-    $ list-jobs
+```bash
+sb list
+```
 
-Run a job:
+Run job:
 
-    $ run-job first
+```bash
+sb run first
+```
 
-Delete a job:
+Remove job:
 
-    $ delete-job first
+```bash
+sb remove first
+```
 
-Run a job from crontab:
+Run job each 5 minutes via cron:
 
-    $ crontab -e
-    * * * * * $HOME/simple-build/bin/run-job first
+```bash
+crontab -e
+*/5 * * * * $HOME/simple-build/sb run first
+```
 
 ## Anatomy of the job
 
 Jobs are stored in `~/.jobs` and a job looks like this:
 
-    $ tree ~/.jobs/test
-    /home/u/.jobs/test
-    ├── build
-    ├── builds
-    │   ├── 2020-10-15_18:46:20.tgz
-    │   └── 2020-10-15_18:46:26.tgz
-    ├── output.log
-    └── workspace
-        └── hello.php
+```bash
+tree ~/.jobs/test
+/home/u/.jobs/test
+├── build
+├── builds
+│   ├── 2020-10-15_18:46:20.tgz
+│   └── 2020-10-15_18:46:26.tgz
+├── output.log
+└── workspace
+    └── hello.php
 
-    2 directories, 5 files
+2 directories, 5 files
+```
 
 The `job` contains the job steps. The `workspace` contains the application source code.
 The `builds` contains tarballs of the workspace. The `job.log` contains job output.

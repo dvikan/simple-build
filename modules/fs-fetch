@@ -6,6 +6,11 @@ fs-fetch() {
     FOLDER="$1"
     echo "[fs-fetch]"
 
+    if [[ ! -d "$FOLDER" ]]; then
+        echo "Folder not found: $FOLDER"
+        exit
+    fi
+
     rm -rf ./workspace
     cp -r "$FOLDER" ./workspace
 }

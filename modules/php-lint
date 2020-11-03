@@ -1,9 +1,14 @@
 #!/bin/sh
 #
-# Lint all php files in ./workspace
+# Lint all php files in ./workspace/src
 
 php-lint() {
     echo "[php-lint]"
 
-    find ./workspace -name '*.php' -print0 | xargs -0 -n1 php -l
+    if [[ ! -d "./workspace/src" ]]; then
+        echo "Folder  not found: ./workspace/src"
+        exit 1
+    fi
+
+    find ./workspace/src -name '*.php' | xargs -n1 php -l
 }
