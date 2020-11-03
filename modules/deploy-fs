@@ -1,9 +1,12 @@
 #!/bin/sh
 #
-# Extract tarball into deploy folder
+# Extract a tarball into destination folder
 
 deploy-fs() {
+    TARBALL="$1"
+    DEST="$2"
+
     echo "[deploy-fs]"
 
-    tar -xvf "$1" -C "$2"
+    tar -xf "$TARBALL" -C "$DEST"
 }

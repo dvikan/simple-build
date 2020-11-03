@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# Lint all php files
+# Lint all php files in ./workspace
 
 php-lint() {
     echo "[php-lint]"

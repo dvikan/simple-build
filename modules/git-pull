@@ -1,9 +1,15 @@
 #!/bin/sh
 #
-# Update the git repository in ./workspace
+# Clone and then update the git repository in ./workspace
 
 git-pull() {
+    REPO="$1"
     echo "[git-pull]"
 
-    git -C ./workspace pull
+    if [ -d ./workspace ]; then
+        git -C ./workspace pull
+    else
+        git clone "$1" ./workspace
+    fi
+
 }

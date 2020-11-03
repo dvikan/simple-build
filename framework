@@ -25,8 +25,21 @@ create-job() {
     mkdir "$JOBS/$NAME/"
     mkdir "$JOBS/$NAME/workspace"
     mkdir "$JOBS/$NAME/builds"
+    mkdir "$JOBS/$NAME/config"
 
-    touch "$JOBS/$NAME/build"
+    touch "$JOBS/$NAME/job"
+    touch "$JOBS/$NAME/job.log"
+}
+
+edit-job() {
+    NAME="$1"
+
+    if [ ! -d "$JOBS/$NAME" ]; then
+        echo "Job with name $NAME does not exists"
+        exit 1
+    fi
+
+    vim "$JOBS/$NAME/job"
 }
 
 list-jobs() {
@@ -58,9 +71,10 @@ run-job() {
     # Change current working directory to the job folder
     cd "$JOBS/$NAME"
 
-    LOG="./output.log"
-    date '+%Y-%m-%d %H:%M:%S' | tee -a "$LOG"
-    # Write to both stdout, stderr and file
-    source "./build" 2>&1 | tee -a "$LOG"
+    LOG="./job.log"
+    HEADER=$(date '+%Y-%m-%d %H:%M:%S')
+    echo "[$HEADER]" | tee -a "$LOG"
+    # Write to stdout and file
+    source "./job" 2>&1 | tee -a "$LOG"
+    echo "" | tee -a "$LOG"
 }
-

@@ -5,7 +5,9 @@ simple-build is a free and open source automation server.
 It tries to be as simple as possible and is useful for users who are
 familiar with linux and bash.
 
-## Features
+Features:
+
+* Logging of each job
 
 ## Non-features (requires manual steps)
 
@@ -16,7 +18,7 @@ familiar with linux and bash.
 
 Core modules:
 
-* git-fetch Fetch source codes from git repository
+* git-pull Fetch source codes from git repository
 * composer-install Install composer dependencies
 * php-lint Lint php source code
 * tarball-create Create a tarball
@@ -69,5 +71,5 @@ Jobs are stored in `~/.jobs` and a job looks like this:
 
     2 directories, 5 files
 
-The `build` contains the build steps. The `workspace` contains the application source code.
-The `builds` contains tarballs of the workspace. The `output.log` contains build output.
+The `job` contains the job steps. The `workspace` contains the application source code.
+The `builds` contains tarballs of the workspace. The `job.log` contains job output.
